@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "target": "es2024",
+    "noEmitOnError": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true
+  }
+}
