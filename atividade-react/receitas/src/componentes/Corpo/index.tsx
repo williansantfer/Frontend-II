@@ -1,3 +1,5 @@
+import CartaoReceita from "../CartaoReceita"
+
 const Corpo = () => {
 
     const receitas = [{
@@ -18,6 +20,7 @@ const Corpo = () => {
         "Asse por 15 minutos.",
         "Retire do forno. Adicione a alface e sirva.",
     ],
+    imagem: "https://www.comidaereceitas.com.br/wp-content/uploads/2020/03/Salmao-assado-no-forno-freepik.jpg"
 },
 {
     nome: "Tacos de Peixe",
@@ -33,10 +36,11 @@ const Corpo = () => {
         "Coloque o peixe sobre as 3 tortilhas.",
         "Cubra com alface, tomates e queijo.",
     ],
+    
 }]
 
     return (<ul>
-        {receitas.map(receita => (<li>{receita.nome}</li>))}
+        {receitas.map(receita => <CartaoReceita nome={receita.nome} />)}
     </ul>)
 
 }
