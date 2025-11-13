@@ -1,8 +1,24 @@
+import { useState } from "react"
 import CartaoReceita from "../CartaoReceita"
+import ".style.css"
+
+interface Receita {
+    id: number
+    nome: string
+    ingredientes: {
+        nome: string
+        quantidade: number
+        medida: string
+    }[]
+    instrucoes: string[]
+    imagem?: string
+}
+
 
 const Corpo = () => {
 
-    const receitas = [{
+    const [ receitas, setReceitas ] = useState<Receita[]>([{
+        id: 1, 
     nome: "Salmão Assado",
     ingredientes: [
         { nome: "Salmão", quantidade: 1, medida: "grande" },
@@ -23,6 +39,7 @@ const Corpo = () => {
     imagem: "https://www.comidaereceitas.com.br/wp-content/uploads/2020/03/Salmao-assado-no-forno-freepik.jpg"
 },
 {
+    id: 2,
     nome: "Tacos de Peixe",
     ingredientes: [
         { nome: "Peixe Branco", quantidade: 1, medida: "grande" },
@@ -36,12 +53,30 @@ const Corpo = () => {
         "Coloque o peixe sobre as 3 tortilhas.",
         "Cubra com alface, tomates e queijo.",
     ],
+    imagem: "https://www.comidaereceitas.com.br/wp-content/uploads/2020/03/Salmao-assado-no-forno-freepik.jpg"
     
-}]
+}])
 
-    return (<ul>
-        {receitas.map(receita => <CartaoReceita nome={receita.nome} />)}
-    </ul>)
+function aoDeletar(id: number) {
+    setReceitas(receitas.filter(receita => receita.id !== id))
+}
+
+    return (
+    <ul>
+    <div className="d-flex justify-content-center gap-3">
+        {receitas.map(receita => (
+            <CartaoReceita 
+                key={receita.id}
+                id={receita.id}
+                nome={receita.nome}
+                ingredientes={receita.ingredientes}
+                instrucoes={receita.instrucoes}
+                imagem={receita.imagem}
+                aoDeletar={aoDeletar}
+         />))}
+    </div>
+    </ul>
+    )
 
 }
 

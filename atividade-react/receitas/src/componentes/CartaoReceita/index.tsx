@@ -1,6 +1,58 @@
-const CartaReceita = () => {
+import { FaTrashAlt } from "react-icons/fa";
 
-    return <p>Este é um cartão de receita</p>
+interface CartaoReceitaProps {
+    id: number
+    nome: string
+    ingredientes: {
+        nome: string
+        quantidade: number
+        medida: string
+    }[]
+    instrucoes: string[]
+    imagem?: string
+    aoDeletar: (id: number) => void
+}
+
+const CartaReceita = ({ id, nome, ingredientes, instrucoes, imagem, aoDeletar }: CartaoReceitaProps) => {
+
+    return (
+        <article className="card rounded col-6 shadow">
+            <div className="card-img-top">
+                <img className="card-img" src={imagem} alt="" />
+            </div>
+            <div className="text-center">
+                <h2 className="fw-bold display-6">{nome}</h2>
+            </div>
+            <div>
+
+            </div>
+            <img src={imagem} alt="" />
+            <h2>{nome}</h2>
+            <div className="card-body">
+            <h3>Ingredientes</h3>
+            <ul>
+                {ingredientes.map(ingrediente => (
+                    <li>{ingrediente.nome} ({ingrediente.quantidade} {ingrediente.medida})</li>
+                ))}
+            </ul>
+
+            <h3>Como fazer</h3>
+            <ol>
+                {instrucoes.map(instrucao => (
+                    <li>{instrucao}</li>
+                ))}
+            </ol>
+            <div className="card-footer">
+                <button onClick={() => aoDeletar(id)}>
+
+                    <FaTrashAlt />
+
+                </button>
+
+            </div>
+            </div>
+        </article>
+    )
 }
 
 export default CartaReceita
