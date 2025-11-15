@@ -11,10 +11,10 @@ const Avaliacao = () => {
     
     return (
         <div>
-            {coracoes.map((_, i) => {
+            {coracoes.map((_, i) => (
                 <Coracao
                     key={uuidv4()}
-                    selecionado={avaliacao > 1}
+                    selecionado={avaliacao > i}
                     aoSelecionar={() => {
                         setAvaliacao(i + 1)
                     }}

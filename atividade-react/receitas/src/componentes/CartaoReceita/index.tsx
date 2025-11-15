@@ -1,4 +1,7 @@
 import { FaTrashAlt } from "react-icons/fa";
+import Avaliacao from "../Avaliacao";
+
+import { FaEdit } from "react-icons/fa";
 
 interface CartaoReceitaProps {
     id: number
@@ -29,27 +32,34 @@ const CartaReceita = ({ id, nome, ingredientes, instrucoes, imagem, aoDeletar }:
             <img src={imagem} alt="" />
             <h2>{nome}</h2>
             <div className="card-body">
-            <h3>Ingredientes</h3>
-            <ul>
-                {ingredientes.map(ingrediente => (
-                    <li>{ingrediente.nome} ({ingrediente.quantidade} {ingrediente.medida})</li>
-                ))}
-            </ul>
+                <h3>Ingredientes</h3>
+                <ul>
+                    {ingredientes.map(ingrediente => (
+                        <li>{ingrediente.nome} ({ingrediente.quantidade} {ingrediente.medida})</li>
+                    ))}
+                </ul>
 
-            <h3>Como fazer</h3>
-            <ol>
-                {instrucoes.map(instrucao => (
-                    <li>{instrucao}</li>
-                ))}
-            </ol>
-            <div className="card-footer">
-                <button onClick={() => aoDeletar(id)}>
+                <h3>Como fazer</h3>
+                <ol>
+                    {instrucoes.map(instrucao => (
+                        <li>{instrucao}</li>
+                    ))}
+                </ol>
+            </div>
+            <div className="card-footer d-flex justify-content-between">
+                <Avaliacao />
+                <div>
+
+                <button className="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <FaEdit />
+                </button>
+
+                <button className="border-0 bg-transparent" onClick={() => aoDeletar(id)}>
 
                     <FaTrashAlt />
 
                 </button>
-
-            </div>
+                </div>
             </div>
         </article>
     )

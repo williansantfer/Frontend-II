@@ -1,81 +1,79 @@
 import { useState } from "react"
 import CartaoReceita from "../CartaoReceita"
-import ".style.css"
+import Formulario from "../Formulario"
+import type { IReceita } from "../../interfaces/Receita"
 
-interface Receita {
-    id: number
-    nome: string
-    ingredientes: {
-        nome: string
-        quantidade: number
-        medida: string
-    }[]
-    instrucoes: string[]
-    imagem?: string
-}
+
 
 
 const Corpo = () => {
 
-    const [ receitas, setReceitas ] = useState<Receita[]>([{
-        id: 1, 
-    nome: "Salmão Assado",
-    ingredientes: [
-        { nome: "Salmão", quantidade: 1, medida: "grande" },
-        { nome: "Pinoli", quantidade: 1, medida: "xícara" },
-        { nome: "Alface Manteiga", quantidade: 2, medida: "xícaras" },
-        { nome: "Abobrinha Amarela", quantidade: 1, medida: "média" },
-        { nome: "Azeite de Oliva", quantidade: 0.5, medida: "xícara" },
-        { nome: "Alho", quantidade: 3, medida: "dentes" },
-    ],
-    instrucoes: [
-        "Preaqueça o forno a 180°C.",
-        "Espalhe o azeite de oliva em uma assadeira de vidro.",
-        "Adicione a abobrinha amarela e leve ao forno por 30 minutos.",
-        "Adicione o salmão, o alho e os pinolis à assadeira.",
-        "Asse por 15 minutos.",
-        "Retire do forno. Adicione a alface e sirva.",
-    ],
-    imagem: "https://www.comidaereceitas.com.br/wp-content/uploads/2020/03/Salmao-assado-no-forno-freepik.jpg"
-},
-{
-    id: 2,
-    nome: "Tacos de Peixe",
-    ingredientes: [
-        { nome: "Peixe Branco", quantidade: 1, medida: "grande" },
-        { nome: "Queijo", quantidade: 1, medida: "xícara" },
-        { nome: "Alface Americana", quantidade: 2, medida: "xícaras" },
-        { nome: "Tomates", quantidade: 2, medida: "grandes" },
-        { nome: "Tortilhas", quantidade: 3, medida: "médias" },
-    ],
-    instrucoes: [
-        "Grelhe o peixe até que esteja completamente cozido.",
-        "Coloque o peixe sobre as 3 tortilhas.",
-        "Cubra com alface, tomates e queijo.",
-    ],
-    imagem: "https://www.comidaereceitas.com.br/wp-content/uploads/2020/03/Salmao-assado-no-forno-freepik.jpg"
-    
-}])
+    const [receitas, setReceitas] = useState<IReceita[]>([{
+        id: 1,
+        nome: "Salmão Assado",
+        ingredientes: [
+            { nome: "Salmão", quantidade: 1, medida: "grande" },
+            { nome: "Pinoli", quantidade: 1, medida: "xícara" },
+            { nome: "Alface Manteiga", quantidade: 2, medida: "xícaras" },
+            { nome: "Abobrinha Amarela", quantidade: 1, medida: "média" },
+            { nome: "Azeite de Oliva", quantidade: 0.5, medida: "xícara" },
+            { nome: "Alho", quantidade: 3, medida: "dentes" },
+        ],
+        instrucoes: [
+            "Preaqueça o forno a 180°C.",
+            "Espalhe o azeite de oliva em uma assadeira de vidro.",
+            "Adicione a abobrinha amarela e leve ao forno por 30 minutos.",
+            "Adicione o salmão, o alho e os pinolis à assadeira.",
+            "Asse por 15 minutos.",
+            "Retire do forno. Adicione a alface e sirva.",
+        ],
+        imagem: "https://www.comidaereceitas.com.br/wp-content/uploads/2020/03/Salmao-assado-no-forno-freepik.jpg"
+    },
+    {
+        id: 2,
+        nome: "Tacos de Peixe",
+        ingredientes: [
+            { nome: "Peixe Branco", quantidade: 1, medida: "grande" },
+            { nome: "Queijo", quantidade: 1, medida: "xícara" },
+            { nome: "Alface Americana", quantidade: 2, medida: "xícaras" },
+            { nome: "Tomates", quantidade: 2, medida: "grandes" },
+            { nome: "Tortilhas", quantidade: 3, medida: "médias" },
+        ],
+        instrucoes: [
+            "Grelhe o peixe até que esteja completamente cozido.",
+            "Coloque o peixe sobre as 3 tortilhas.",
+            "Cubra com alface, tomates e queijo.",
+        ],
+        imagem: "https://previous-assets.womenshealth.pt/files/2020/01/shutterstock_228457978.jpg"
 
-function aoDeletar(id: number) {
-    setReceitas(receitas.filter(receita => receita.id !== id))
-}
+    }])
+
+    function aoDeletar(id: number) {
+        setReceitas(receitas.filter(receita => receita.id !== id))
+    }
 
     return (
-    <ul>
-    <div className="d-flex justify-content-center gap-3">
-        {receitas.map(receita => (
-            <CartaoReceita 
-                key={receita.id}
-                id={receita.id}
-                nome={receita.nome}
-                ingredientes={receita.ingredientes}
-                instrucoes={receita.instrucoes}
-                imagem={receita.imagem}
-                aoDeletar={aoDeletar}
-         />))}
-    </div>
-    </ul>
+        <div className="container">
+            <div className="d-flex justify-content-center gap-3">
+                {receitas.map(receita => (
+                    <>
+                        <CartaoReceita
+                            key={receita.id}
+                            id={receita.id}
+                            nome={receita.nome}
+                            ingredientes={receita.ingredientes}
+                            instrucoes={receita.instrucoes}
+                            imagem={receita.imagem}
+                            aoDeletar={aoDeletar}
+                        />
+                        <Formulario
+                            key={receita.id}
+                            receita={receita}
+                        />
+                    </>
+                ))}
+            </div>
+        </div>
     )
 
 }
