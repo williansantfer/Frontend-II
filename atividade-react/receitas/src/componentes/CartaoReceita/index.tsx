@@ -29,7 +29,7 @@ const CartaReceita = ({ id, nome, ingredientes, instrucoes, imagem, aoDeletar }:
             <div>
 
             </div>
-            <img src={imagem} alt="" />
+
             <h2>{nome}</h2>
             <div className="card-body">
                 <h3>Ingredientes</h3>
@@ -50,7 +50,8 @@ const CartaReceita = ({ id, nome, ingredientes, instrucoes, imagem, aoDeletar }:
                 <Avaliacao />
                 <div>
 
-                <button className="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button className="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target=
+                    {`#${id}`} onClick={() => { }}>
                     <FaEdit />
                 </button>
 

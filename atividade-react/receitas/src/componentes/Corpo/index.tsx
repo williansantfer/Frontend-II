@@ -2,9 +2,7 @@ import { useState } from "react"
 import CartaoReceita from "../CartaoReceita"
 import Formulario from "../Formulario"
 import type { IReceita } from "../../interfaces/Receita"
-
-
-
+import { v4 as uuidv4 } from 'uuid';
 
 const Corpo = () => {
 
@@ -52,13 +50,19 @@ const Corpo = () => {
         setReceitas(receitas.filter(receita => receita.id !== id))
     }
 
+    const aoEditar = (receita: IReceita) => {
+
+        setReceitas(receitas.map( r => (r.id === receita.id ? receita : r)))
+
+    }
+
     return (
         <div className="container">
             <div className="d-flex justify-content-center gap-3">
                 {receitas.map(receita => (
                     <>
                         <CartaoReceita
-                            key={receita.id}
+                            key={uuidv4()}
                             id={receita.id}
                             nome={receita.nome}
                             ingredientes={receita.ingredientes}
@@ -67,9 +71,11 @@ const Corpo = () => {
                             aoDeletar={aoDeletar}
                         />
                         <Formulario
-                            key={receita.id}
+                            key={uuidv4()}
                             receita={receita}
+                            aoEditar={aoEditar}
                         />
+
                     </>
                 ))}
             </div>

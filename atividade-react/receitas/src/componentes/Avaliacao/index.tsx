@@ -13,6 +13,7 @@ const Avaliacao = () => {
         <div>
             {coracoes.map((_, i) => (
                 <Coracao
+                    
                     key={uuidv4()}
                     selecionado={avaliacao > i}
                     aoSelecionar={() => {
